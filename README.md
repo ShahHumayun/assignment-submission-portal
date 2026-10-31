@@ -1,5 +1,5 @@
 # Assignment Submission Portal
-
+![CI/CD](https://github.com/ShahHumayun/assignment-submission-portal/actions/workflows/ci.yml/badge.svg)
 A simple assignment submission portal built for **DevOps for Cloud Computing (CSC418)** at COMSATS University Islamabad, Attock Campus. Students submit their name, registration number, assignment title and a link to their work. Every code change is tested automatically, and the test report is delivered to a local receiver as JSON.
 
 **Live demo:** https://shahhumayun.github.io/assignment-submission-portal/

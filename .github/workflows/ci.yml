@@ -28,6 +28,18 @@ jobs:
         working-directory: server
         run: npm test
 
+      - name: Show test summary
+        if: always()
+        run: node scripts/job-summary.mjs
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: server/test-results.json
+          if-no-files-found: warn
+
   build:
     name: Build demo site
     needs: test

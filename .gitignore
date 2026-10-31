@@ -26,3 +26,5 @@ dist-ssr
 server/data/
 receiver/testreport.json
 .env
+
+server/test-results.json
