@@ -28,3 +28,7 @@ receiver/testreport.json
 .env
 
 server/test-results.json
+
+report/
+receiver/reports/
+receiver/testreport.json
