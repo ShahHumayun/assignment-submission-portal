@@ -9,6 +9,19 @@ const outFile = path.join(outDir, 'testreport.json')
 
 const env = process.env
 const stripAnsi = (s) => String(s).replace(/\u001b\[[0-9;]*m/g, '')
+const rootPosix = root.replace(/\\/g, '/')
+
+// Keep the assertion message plus one line pointing at our own test file.
+// Drops long stack traces, node_modules internals and local machine paths.
+function cleanFailure(messages) {
+  const text = stripAnsi((messages || []).join('\n')).split(rootPosix).join('<repo>')
+  const lines = text.split('\n')
+  const message = lines.filter((l) => !/^\s+at /.test(l))
+  const location = lines.find(
+    (l) => /^\s+at /.test(l) && !l.includes('node_modules') && !l.includes('node:internal')
+  )
+  return [...message, ...(location ? [location.trim()] : [])].join('\n').slice(0, 1000)
+}
 
 const fullName = env.GITHUB_REPOSITORY || 'local/assignment-submission-portal'
 const base = {
@@ -44,7 +57,7 @@ if (!fs.existsSync(resultsFile)) {
       tests.push({
         name: `${path.basename(file.name)} (test file failed to run)`,
         result: 'failed',
-        failureMessage: stripAnsi(file.message || 'Test file failed to run').slice(0, 2000),
+        failureMessage: cleanFailure([file.message || 'Test file failed to run']),
       })
       continue
     }
@@ -54,9 +67,7 @@ if (!fs.existsSync(resultsFile)) {
         name: t.fullName || t.title,
         result,
         failureMessage:
-          result === 'failed'
-            ? stripAnsi((t.failureMessages || []).join('\n')).slice(0, 2000) || 'Test did not pass'
-            : null,
+          result === 'failed' ? cleanFailure(t.failureMessages) || 'Test did not pass' : null,
       })
     }
   }

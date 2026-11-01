@@ -40,6 +40,53 @@ jobs:
           path: server/test-results.json
           if-no-files-found: warn
 
+  report:
+    name: Send report to localhost
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Download test results
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: test-results
+          path: server
+
+      - name: Build report
+        run: node scripts/build-report.mjs
+
+      - name: Send report to local receiver
+        env:
+          REPORT_URL: ${{ secrets.REPORT_URL }}
+          REPORT_TOKEN: ${{ secrets.REPORT_TOKEN }}
+        run: |
+          if [ -z "$REPORT_URL" ]; then
+            echo "REPORT_URL secret is not set"
+            exit 1
+          fi
+          curl --fail-with-body --silent --show-error \
+            --retry 5 --retry-delay 3 --retry-all-errors --max-time 20 \
+            -X POST "$REPORT_URL/report" \
+            -H "Content-Type: application/json" \
+            -H "x-report-token: $REPORT_TOKEN" \
+            -H "ngrok-skip-browser-warning: true" \
+            --data-binary @report/testreport.json
+
+      - name: Keep a copy of the report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: report/testreport.json
+          if-no-files-found: warn
+
   build:
     name: Build demo site
     needs: test
