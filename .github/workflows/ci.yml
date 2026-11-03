@@ -97,7 +97,7 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: "DevOps Lab Test Report - Status: ${{ job.status }} (Commit ${{ github.sha }})"
-          to: babar.shazad@cuiatk.edu.pk
+          to: sp23-bcs-038@cuiatk.edu.pk
           from: "DevOps CI Pipeline <shahhumayun57@gmail.com>"
           body: |
             The automated pipeline run for the Assignment Submission Portal has completed.
