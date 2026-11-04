@@ -1,0 +1,83 @@
+{
+  "repository": "assignment-submission-portal",
+  "repositoryFullName": "ShahHumayun/assignment-submission-portal",
+  "branch": "main",
+  "commitSha": "96fc63a744a57d5a56a8b557ff92cd584c914320",
+  "pipelineRunId": "41705181469",
+  "pipelineRunNumber": "11",
+  "pipelineRunUrl": "https://github.com/ShahHumayun/assignment-submission-portal/actions/runs/41705181469",
+  "executionTimestamp": "2026-11-03T19:39:22.045Z",
+  "overallStatus": "passed",
+  "summary": {
+    "total": 13,
+    "passed": 13,
+    "failed": 0
+  },
+  "tests": [
+    {
+      "name": "Assignment submission API saves a submission with complete details and a valid URL",
+      "result": "passed",
+      "failureMessage": null
+    },
+    {
+      "name": "Assignment submission API rejects a submission with a missing registration number",
+      "result": "passed",
+      "failureMessage": null
+    },
+    {
+      "name": "Assignment submission API rejects an invalid submission URL and does not save it",
+      "result": "passed",
+      "failureMessage": null
+    },
+    {
+      "name": "URL validation accepts https://github.com/user/repo",
+      "result": "passed",
+      "failureMessage": null
+    },
+    {
+      "name": "URL validation accepts http://example.com",
+      "result": "passed",
+      "failureMessage": null
+    },
+    {
+      "name": "URL validation accepts http://localhost:3000/page",
+      "result": "passed",
+      "failureMessage": null
+    },
+    {
+      "name": "URL validation rejects \"\"",
+      "result": "passed",
+      "failureMessage": null
+    },
+    {
+      "name": "URL validation rejects \"not-a-url\"",
+      "result": "passed",
+      "failureMessage": null
+    },
+    {
+      "name": "URL validation rejects \"ftp://example.com/file\"",
+      "result": "passed",
+      "failureMessage": null
+    },
+    {
+      "name": "URL validation rejects \"javascript:alert(1)\"",
+      "result": "passed",
+      "failureMessage": null
+    },
+    {
+      "name": "URL validation rejects \"http://\"",
+      "result": "passed",
+      "failureMessage": null
+    },
+    {
+      "name": "Submission validation reports every missing field",
+      "result": "passed",
+      "failureMessage": null
+    },
+    {
+      "name": "Submission validation treats whitespace-only values as missing",
+      "result": "passed",
+      "failureMessage": null
+    }
+  ]
+}
