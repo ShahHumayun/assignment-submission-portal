@@ -19,7 +19,7 @@ export function validateSubmission(body = {}) {
 
   const errors = {};
   if (!data.name) errors.name = 'Name is required';
-  // if (!data.registrationNumber) errors.registrationNumber = 'Registration number is required';
+  if (!data.registrationNumber) errors.registrationNumber = 'Registration number is required';
   if (!data.assignmentTitle) errors.assignmentTitle = 'Assignment title is required';
   if (!data.submissionUrl) errors.submissionUrl = 'Submission URL is required';
   else if (!isValidUrl(data.submissionUrl)) errors.submissionUrl = 'Submission URL is not a valid http(s) URL';
